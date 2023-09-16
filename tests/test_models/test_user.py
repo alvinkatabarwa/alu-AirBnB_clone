@@ -13,29 +13,29 @@ class TestUser(unittest.TestCase):
         """Test user mail"""
         user = User()
         self.assertEqual(user.email, "")
-        user.email = "ssam@gmail.com"
-        self.assertEqual(user.email, "ssam@gmail.com")
+        user.email = "gnondoyixavier@gmail.com"
+        self.assertEqual(user.email, "gnondoyixavier@gmail.com")
 
     def test_password(self):
         """Test user password"""
         user = User()
         self.assertEqual(user.password, "")
-        user.password = "wosswobi"
-        self.assertEqual(user.password, "wosswobi")
+        user.password = "Gnondohi00?"
+        self.assertEqual(user.password, "Gnondohi00?")
 
     def test_first_name(self):
         """Test user first_name"""
         user = User()
         self.assertEqual(user.first_name, "")
-        user.first_name = "sammy"
-        self.assertEqual(user.first_name, "sammy")
+        user.first_name = "xav"
+        self.assertEqual(user.first_name, "xavier")
 
     def test_last_name(self):
         """Test user last_name"""
         user = User()
         self.assertEqual(user.last_name, "")
-        user.last_name = "gbolahan"
-        self.assertEqual(user.last_name, "gbolahan")
+        user.last_name = "Gnondoyi"
+        self.assertEqual(user.last_name, "Gnondoyi")
 
 
 if __name__ == "__main__":
