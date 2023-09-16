@@ -1,43 +1,38 @@
 #!/usr/bin/python3
-"""Test BaseModel"""
-
 import unittest
 from models.base_model import BaseModel
 
 
-class TestBaseModel(unittest.TestCase):
-    """test BaseModel"""
+class TestBase(unittest.TestCase):
+    def test_initialization(self):
+        model = BaseModel()
+        self.assertEqual(
+            str(type(model)), "<class 'models.base_model.BaseModel'>")
+        self.assertEqual(str(type(model.id)), "<class 'str'>")
+        self.assertEqual(
+            str(type(model.created_at)), "<class 'datetime.datetime'>")
+        self.assertEqual(
+            str(type(model.updated_at)), "<class 'datetime.datetime'>")
 
-    def test_save_BaseModel(self):
-        """test save_Basemodel"""
-        base = BaseModel()
-        self.assertEqual(base.created_at, base.updated_at)
+    def test_string(self):
+        model = BaseModel()
+        dt = "[{}] ({}) {}".format(
+            model.__class__.__name__, model.id, model.__dict__)
+        self.assertEqual(str(model), dt)
 
-    def test_doc(self):
-        """ Tests doc """
-        self.assertIsNotNone(BaseModel.__doc__)
+    def test_save(self):
+        model = BaseModel()
+        time = model.updated_at
+        model.save()
+        self.assertGreater(model.updated_at, time)
 
-    def test_to_json(self):
-    """Test the to_json method"""
-    base = BaseModel()
-    base_json = base.to_json()
-
-    self.assertIsInstance(base_json, dict)
-
-    self.assertIn("id", base_json)
-    self.assertIn("created_at", base_json)
-    self.assertIn("updated_at", base_json)
-    self.assertIn("__class__", base_json)
-    self.assertEqual(base.id, base_json["id"])
-    self.assertEqual("BaseModel", base_json["__class__"])
-
-    def test_kwarg(self):
-        basemodel = BaseModel()
-        self.assertEqual(basemodel.__class__.__name__, "BaseModel")
-        self.assertTrue(hasattr(basemodel, "id"))
-        self.assertTrue(hasattr(basemodel, "created_at"))
-        self.assertTrue(hasattr(basemodel, "updated_at"))
-        self.assertTrue(hasattr(basemodel, "__class__"))
+    def test_dict(self):
+        model = BaseModel()
+        obj = model.to_dict()
+        self.assertEqual(obj["id"], model.id)
+        self.assertEqual(obj["__class__"], model.__class__.__name__)
+        self.assertEqual(obj["created_at"], model.created_at.isoformat())
+        self.assertEqual(obj["updated_at"], model.updated_at.isoformat())
 
 
 if __name__ == "__main__":
