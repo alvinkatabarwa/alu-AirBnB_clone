@@ -3,6 +3,7 @@
 import unittest
 from io import StringIO
 from unittest.mock import patch
+from models.engine.file_storage import FileStorage
 import pep8
 import os
 import console
@@ -578,7 +579,7 @@ class TestHBNBCommand_all(unittest.TestCase):
             os.rename("file.json", "tmp")
         except IOError:
             pass
-        FileStorage.__objects = {}
+        FileStorage.__objects = {""}
 
     @classmethod
     def tearDown(self):
