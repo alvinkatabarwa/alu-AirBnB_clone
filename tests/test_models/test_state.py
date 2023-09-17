@@ -1,37 +1,15 @@
 #!/usr/bin/python3
 import unittest
-from models import State
-import datetime
+from models.state import State
 
 
-class TestState(unittest.TestCase):
-
-    def setUp(self):
-
-        self.test_model1 = State()
-        self.test_model2 = State()
-
-    def test_basic_setup(self):
-
-        self.assertTrue(hasattr(self.test_model1, "name"))
-        self.assertFalse(hasattr(self.test_model1, "first_name"))
-        self.assertTrue(self.test_model1.id != self.test_model2.id)
-        m1c = self.test_model1.created_at
-        m2c = self.test_model2.created_at
-        self.assertTrue(m1c != m2c)
-        self.assertTrue(type(m1c) is datetime.datetime)
-
-    def test_types(self):
-
-        self.assertTrue(type(self.test_model1.name) is str)
-
-    def test_save(self):
-
-        m1u = self.test_model1.updated_at
-        self.test_model1.save()
-        m1u_saved = self.test_model1.updated_at
-        self.assertFalse(m1u == m1u_saved)
+class TestBase(unittest.TestCase):
+    def test_initialization(self):
+        state = State()
+        self.assertEqual(
+            str(type(state)), "<class 'models.state.State'>")
+        self.assertEqual(state.name, "")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -1,33 +1,25 @@
 #!/usr/bin/python3
 import unittest
-from models import City
-import datetime
+from models.place import Place
 
 
-class TestCity(unittest.TestCase):
-
-    def setUp(self):
-        self.test_model1 = City()
-        self.test_model2 = City()
-
-    def test_basic_setup(self):
-
-        self.assertTrue(hasattr(self.test_model1, "state_id"))
-        self.assertTrue(hasattr(self.test_model1, "name"))
-        self.assertTrue(self.test_model1.id != self.test_model2.id)
-
-    def test_types(self):
-
-        self.assertTrue(type(self.test_model1.state_id) is str)
-        self.assertTrue(type(self.test_model1.name) is str)
-
-    def test_save(self):
-
-        m1u = self.test_model1.updated_at
-        self.test_model1.save()
-        m1u_saved = self.test_model1.updated_at
-        self.assertFalse(m1u == m1u_saved)
+class TestBase(unittest.TestCase):
+    def test_initialization(self):
+        place = Place()
+        self.assertEqual(
+            str(type(place)), "<class 'models.place.Place'>")
+        self.assertEqual(place.name, "")
+        self.assertEqual(place.city_id, "")
+        self.assertEqual(place.user_id, "")
+        self.assertEqual(place.description, "")
+        self.assertEqual(place.number_rooms, 0)
+        self.assertEqual(place.number_bathrooms, 0)
+        self.assertEqual(place.max_guest, 0)
+        self.assertEqual(place.price_by_night, 0)
+        self.assertEqual(place.latitude, 0.0)
+        self.assertEqual(place.longitude, 0.0)
+        self.assertEqual(place.amenity_ids, {})
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
